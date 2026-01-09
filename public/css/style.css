@@ -1,0 +1,669 @@
+/* ----------------------------------------------------
+   ESTILOS GENERALES DEL SISTEMA - VERSIÓN FUTURISTA
+---------------------------------------------------- */
+:root {
+    --primary: #00d4ff;
+    --primary-dark: #0099cc;
+    --secondary: #7c3aed;
+    --dark: #0f0f23;
+    --dark-light: #1a1a3e;
+    --surface: #161632;
+    --text: #e0e0e0;
+    --text-muted: #a0a0b0;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --glow: rgba(0, 212, 255, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 100%);
+    color: var(--text);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Contenedor centrado */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* ----------------------------------------------------
+   MENÚ SUPERIOR FUTURISTA
+---------------------------------------------------- */
+header {
+    background: rgba(22, 22, 50, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    color: var(--primary);
+    text-align: center;
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px var(--glow), 0 0 40px var(--glow);
+    animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+    0%, 100% { text-shadow: 0 0 20px var(--glow), 0 0 40px var(--glow); }
+    50% { text-shadow: 0 0 30px var(--glow), 0 0 60px var(--glow); }
+}
+
+nav {
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+nav a:hover::before {
+    opacity: 1;
+}
+
+/* ----------------------------------------------------
+   CARDS DE PRODUCTOS FUTURISTAS
+---------------------------------------------------- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.card {
+    background: rgba(22, 22, 50, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(0, 212, 255, 0.4),
+        inset 0 0 60px rgba(0, 212, 255, 0.1);
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    filter: brightness(0.9);
+    transition: all 0.4s;
+}
+
+.card:hover img {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.card-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px var(--glow);
+}
+
+/* ----------------------------------------------------
+   BOTONES FUTURISTAS
+---------------------------------------------------- */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 212, 255, 0.5);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success), #059669);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger), #dc2626);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, var(--warning), #d97706);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.logout-btn {
+    display: inline-block;
+    background: #e74c3c;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+/* ----------------------------------------------------
+   TABLAS FUTURISTAS
+---------------------------------------------------- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: rgba(22, 22, 50, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+th, td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+th {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(124, 58, 237, 0.2));
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+tr {
+    transition: all 0.3s;
+}
+
+tr:hover {
+    background: rgba(0, 212, 255, 0.05);
+    transform: scale(1.01);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* ----------------------------------------------------
+   FORMULARIOS FUTURISTAS - CENTRADO VERTICAL
+---------------------------------------------------- */
+.form-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 480px;
+    background: rgba(22, 22, 50, 0.8);
+    backdrop-filter: blur(20px);
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 0 60px rgba(0, 212, 255, 0.05);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    margin: 0 auto;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary);
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 0 20px var(--glow);
+}
+
+input[type="text"], 
+input[type="password"], 
+input[type="email"], 
+select {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    background: rgba(15, 15, 35, 0.6);
+    color: var(--text);
+    font-size: 15px;
+    transition: all 0.3s;
+    outline: none;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="email"]:focus, 
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+    background: rgba(15, 15, 35, 0.8);
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}
+
+/* ----------------------------------------------------
+   MENSAJES FUTURISTAS
+---------------------------------------------------- */
+.alert {
+    padding: 16px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 4px solid;
+    backdrop-filter: blur(10px);
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+    border-left-color: var(--success);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.2);
+    color: var(--danger);
+    border-left-color: var(--danger);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2);
+}
+
+.alert-warning {
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--warning);
+    border-left-color: var(--warning);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+}
+
+/* ----------------------------------------------------
+   RESPONSIVE - TODAS LAS VENTANAS
+---------------------------------------------------- */
+@media (max-width: 1200px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    header h1 {
+        font-size: 28px;
+        letter-spacing: 1px;
+    }
+    
+    nav a {
+        padding: 8px 16px;
+        font-size: 15px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 18px;
+    }
+    
+    .card-body {
+        padding: 16px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 12px 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 15px 0;
+    }
+    
+    header h1 {
+        font-size: 22px;
+    }
+    
+    nav {
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 12px;
+    }
+    
+    nav a {
+        padding: 10px 20px;
+        width: 90%;
+        max-width: 300px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+    }
+    
+    .card img {
+        height: 180px;
+    }
+    
+    .card-title {
+        font-size: 18px;
+    }
+    
+    .card-price {
+        font-size: 20px;
+    }
+    
+    .btn {
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+    
+    .form-wrapper {
+        padding: 15px;
+    }
+    
+    .form-container {
+        padding: 25px 20px;
+        max-width: 100%;
+    }
+    
+    .form-container h2 {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+    
+    input[type="text"], 
+    input[type="password"], 
+    input[type="email"], 
+    select {
+        padding: 12px 16px;
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+    
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    th, td {
+        padding: 10px 8px;
+        font-size: 13px;
+    }
+    
+    .alert {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 20px;
+        letter-spacing: 0.5px;
+    }
+    
+    nav a {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .card img {
+        height: 200px;
+    }
+    
+    .card-body {
+        padding: 14px;
+    }
+    
+    .card-title {
+        font-size: 17px;
+    }
+    
+    .card-price {
+        font-size: 19px;
+    }
+    
+    .form-container {
+        padding: 20px 16px;
+        border-radius: 16px;
+    }
+    
+    .form-container h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+    
+    input[type="text"], 
+    input[type="password"], 
+    input[type="email"], 
+    select {
+        padding: 11px 14px;
+        margin-bottom: 14px;
+    }
+    
+    .btn {
+        padding: 11px 16px;
+        font-size: 14px;
+    }
+    
+    th, td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding: 8px;
+    }
+    
+    header h1 {
+        font-size: 18px;
+    }
+    
+    nav a {
+        font-size: 13px;
+        padding: 8px 14px;
+    }
+    
+    .form-container {
+        padding: 18px 14px;
+    }
+    
+    .form-container h2 {
+        font-size: 20px;
+    }
+    
+    .toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #00ffaa;
+    color: #000;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    box-shadow: 0 0 12px #00ffaa;
+    animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; display: none; }
+}
+
+}
